@@ -3,16 +3,12 @@ import Header from "./components/Header";
 
 export default function App() {
   const [showTodos, setShowTodos] = useState(true);
-  const [newTodo, setNewTodo] = useState({
-    id: "",
-    title: "",
-    completed: false,
-  });
+  const [title, setTitle] = useState("");
   const [todos, setTodos] = useState([
     { id: 1, title: "Learning React", completed: false },
     { id: 2, title: "Learning English", completed: false },
-    { id: 3, title: "Learning JavaScript", completed: false },
-    { id: 4, title: "Watch movie", completed: false },
+    { id: 3, title: "Learning JavaScript", completed: true },
+    { id: 4, title: "Watch movie", completed: true },
     { id: 5, title: "Runing", completed: false },
   ]);
   const handleRemove = (id) => {
@@ -35,20 +31,17 @@ export default function App() {
       })
     );
   };
-  const handleChange = (value) => {
-    console.log(value);
-    setNewTodo({
-      id: Math.random * 1000,
-      title: value,
-      completed: false,
-    });
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newTodo = {
+      id: todos.length + 1,
+      title: title,
+      completed: false,
+    };
     setTodos((prevTodos) => {
       return [...prevTodos, newTodo];
     });
-    setNewTodo({ id: "", title: "", completed: false });
+    setTitle("");
   };
   return (
     <div className="container mx-auto">
@@ -67,8 +60,8 @@ export default function App() {
           <form onSubmit={handleSubmit}>
             <label>
               <input
-                value={newTodo.title}
-                onChange={(e) => handleChange(e.target.value)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 type="text"
                 placeholder="New todo ..."
                 className="w-full border border-gray-400 p-2"
@@ -77,25 +70,27 @@ export default function App() {
           </form>
         </div>
         {showTodos &&
-          todos.map((todo, index) => (
-            <div
-              key={index}
-              className="bg-gray-200 p-4 flex justify-between items-center cursor-pointer"
-            >
-              <h2
-                onClick={() => handleCheck(todo.id)}
-                className={`${todo.completed ? "line-through" : ""}`}
+          todos
+            .sort((a, b) => b.id - a.id)
+            .map((todo, index) => (
+              <div
+                key={index}
+                className="bg-gray-200 p-4 flex justify-between items-center cursor-pointer"
               >
-                {index + 1} - {todo.title}
-              </h2>
-              <span
-                onClick={() => handleRemove(todo.id)}
-                className="bg-red-500 text-white p-1 cursor-pointer"
-              >
-                X
-              </span>
-            </div>
-          ))}
+                <h2
+                  onClick={() => handleCheck(todo.id)}
+                  className={`${todo.completed ? "line-through" : ""}`}
+                >
+                  {todo.id} - {todo.title}
+                </h2>
+                <span
+                  onClick={() => handleRemove(todo.id)}
+                  className="bg-red-500 text-white p-1 cursor-pointer"
+                >
+                  X
+                </span>
+              </div>
+            ))}
       </div>
     </div>
   );
