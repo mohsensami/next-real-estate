@@ -22,6 +22,19 @@ export default function App() {
       });
     });
   };
+  const handleCheck = (id) => {
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      })
+    );
+  };
   const handleChange = (value) => {
     console.log(value);
     setNewTodo({
@@ -67,9 +80,12 @@ export default function App() {
           todos.map((todo, index) => (
             <div
               key={index}
-              className="bg-gray-200 p-4 flex justify-between items-center"
+              className="bg-gray-200 p-4 flex justify-between items-center cursor-pointer"
             >
-              <h2 className={`${todo.completed ? "line-through" : ""}`}>
+              <h2
+                onClick={() => handleCheck(todo.id)}
+                className={`${todo.completed ? "line-through" : ""}`}
+              >
                 {index + 1} - {todo.title}
               </h2>
               <span
