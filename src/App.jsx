@@ -5,11 +5,11 @@ import TodoList from "./components/TodoList";
 export default function App() {
   const [title, setTitle] = useState("");
   const [todos, setTodos] = useState([
-    { id: 1, title: "Learning React", completed: false },
-    { id: 2, title: "Learning English", completed: false },
-    { id: 3, title: "Learning JavaScript", completed: true },
-    { id: 4, title: "Watch movie", completed: true },
-    { id: 5, title: "Runing", completed: false },
+    { id: 1, title: "aa", completed: false },
+    { id: 2, title: "bbb", completed: false },
+    { id: 3, title: "ccc", completed: true },
+    { id: 4, title: "dddd", completed: true },
+    { id: 5, title: "cccc", completed: false },
   ]);
   const handleRemove = (id) => {
     const shouldRemove = window.confirm(
@@ -62,7 +62,6 @@ export default function App() {
                 onChange={(e) => setTitle(e.target.value)}
                 type="text"
                 placeholder="New todo ..."
-                className="w-full border border-gray-400 p-2"
               />
             </label>
           </form>
@@ -71,6 +70,7 @@ export default function App() {
           todos={todos}
           handleCheck={handleCheck}
           handleRemove={handleRemove}
+          setTitle={setTitle}
         />
       </div>
     </div>
