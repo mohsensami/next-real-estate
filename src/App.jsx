@@ -9,7 +9,7 @@ export default function App() {
     { id: 2, title: "bbb", completed: false },
     { id: 3, title: "ccc", completed: true },
     { id: 4, title: "dddd", completed: true },
-    { id: 5, title: "cccc", completed: false },
+    { id: 5, title: "eeeeeee", completed: false },
   ]);
   const handleRemove = (id) => {
     const shouldRemove = window.confirm(
@@ -48,6 +48,18 @@ export default function App() {
     });
     setTitle("");
   };
+
+  const handleEdit = (id, newText) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, title: newText };
+        }
+        return todo;
+      })
+    );
+  };
+
   return (
     <div className="container mx-auto">
       <Header />
@@ -71,6 +83,7 @@ export default function App() {
           handleCheck={handleCheck}
           handleRemove={handleRemove}
           setTitle={setTitle}
+          handleEdit={handleEdit}
         />
       </div>
     </div>

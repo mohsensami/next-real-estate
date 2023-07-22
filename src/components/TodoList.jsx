@@ -3,9 +3,10 @@ import { useState } from "react";
 const TodoList = (props) => {
   const [editId, setEditId] = useState(null);
   const [edit, setEdit] = useState("");
-  const handleKeyDown = (event) => {
-    if (event.keyCode === 13) {
-      console.log(event.target.value);
+  const handleKeyDown = (e, id) => {
+    if (e.keyCode === 13) {
+      props.handleEdit(id, e.target.value);
+      setEditId(null);
     }
   };
 
@@ -20,7 +21,7 @@ const TodoList = (props) => {
                 onChange={(e) => setEdit(e.target.value)}
                 type="text"
                 value={edit}
-                onKeyDown={handleKeyDown}
+                onKeyDown={(e) => handleKeyDown(e, todo.id)}
               />
             ) : (
               <h2
@@ -30,7 +31,7 @@ const TodoList = (props) => {
                 {todo.id} - {todo.title}
               </h2>
             )}
-            <span onClick={() => props.handleRemove(todo.id)}>Remove</span>
+            <span onClick={(e) => props.handleRemove(todo.id)}>Remove</span>
             <span
               onClick={() => {
                 setEditId(todo.id);
