@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-// import { SignOutButton, UserButton, useUser } from '@clerk/nextjs';
+import { SignOutButton, UserButton, useUser } from '@clerk/nextjs';
 import { Plus } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,7 +18,7 @@ import {
 
 function Header() {
     const path = usePathname();
-    // const { user, isSignedIn } = useUser();
+    const { user, isSignedIn } = useUser();
     useEffect(() => {
         console.log(path);
     }, []);
@@ -56,38 +56,38 @@ function Header() {
                         <Plus className="h-5 w-5" /> Post Your Ad
                     </Button>
                 </Link>
-                {
-                    // isSignedIn
-                    false ? (
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Image
-                                    src={user?.imageUrl}
-                                    width={35}
-                                    height={35}
-                                    alt="user profile"
-                                    className="rounded-full"
-                                />
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem>
-                                    <Link href={'/user'}>Profile</Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                    <Link href={'/user#/my-listing'}>My Listing</Link>
-                                </DropdownMenuItem>
+                {isSignedIn ? (
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Image
+                                src={user?.imageUrl}
+                                width={35}
+                                height={35}
+                                alt="user profile"
+                                className="rounded-full"
+                            />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>
+                                <Link href={'/user'}>Profile</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <Link href={'/user#/my-listing'}>My Listing</Link>
+                            </DropdownMenuItem>
 
-                                <DropdownMenuItem> {/* <SignOutButton>Logout</SignOutButton>{' '} */}</DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    ) : (
-                        <Link href={'/sign-in'}>
-                            <Button variant="outline">Login</Button>
-                        </Link>
-                    )
-                }
+                            <DropdownMenuItem>
+                                {' '}
+                                <SignOutButton>Logout</SignOutButton>{' '}
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                ) : (
+                    <Link href={'/sign-in'}>
+                        <Button variant="outline">Login</Button>
+                    </Link>
+                )}
             </div>
         </div>
     );
