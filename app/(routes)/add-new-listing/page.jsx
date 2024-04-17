@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import Select from 'react-select';
 
@@ -26,13 +27,15 @@ export default function AddNewListing() {
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                console.log(data);
+                // console.log(data);
 
                 if (data.results.length > 0) {
                     const { results } = data;
                     const dataa = results.map((post) => ({
                         value: post.formatted,
                         label: post.formatted,
+                        lat: post.geometry.lat,
+                        lng: post.geometry.lng,
                     }));
                     return dataa;
                     // console.log(results);
@@ -50,25 +53,28 @@ export default function AddNewListing() {
     };
 
     const handleChange = (value) => {
-        console.log(value);
-        setInputCity(value);
-        fetchCoordinates(value);
+        setOptions(value);
     };
 
     return (
-        <div className="App">
-            <AsyncSelect
-                cacheOptions={options.map((item) => {
-                    return {
-                        value: item.formatted,
-                        label: item.formatted,
-                    };
-                })}
-                // defaultOptions
-                loadOptions={fetchCoordinates}
-                onChange={handleChange}
-                placeholder="Search for a post..."
-            />
+        <div className="container">
+            <div className=" mt-40 flex items-center gap-2">
+                <AsyncSelect
+                    className="w-full"
+                    // cacheOptions={options.map((item) => {
+                    //     return {
+                    //         value: item.formatted,
+                    //         label: item.formatted,
+                    //     };
+                    // })}
+                    // defaultOptions
+                    loadOptions={fetchCoordinates}
+                    onChange={handleChange}
+                    placeholder="Search for a post..."
+                    isClearable={true}
+                />
+                <Button onClick={() => console.log(options)}>Submit</Button>
+            </div>
         </div>
     );
 }
