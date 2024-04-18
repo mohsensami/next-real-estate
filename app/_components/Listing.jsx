@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import GoogleAddressSearch from './GoogleAddressSearch';
 import { Button } from '@/components/ui/button';
-// import FilterSection from './FilterSection';
+import FilterSection from './FilterSection';
 import Link from 'next/link';
 
 function Listing({
@@ -20,24 +20,24 @@ function Listing({
     return (
         <div>
             <div className="p-3 flex gap-6">
-                <GoogleAddressSearch
+                {/* <GoogleAddressSearch
                     selectedAddress={(v) => {
                         searchedAddress(v);
                         setAddress(v);
                     }}
                     setCoordinates={setCoordinates}
-                />
+                /> */}
                 <Button className="flex gap-2" onClick={handleSearchClick}>
                     <Search className="h-4 w-4" />
                     Search
                 </Button>
             </div>
-            {/* <FilterSection
+            <FilterSection
                 setBathCount={setBathCount}
                 setBedCount={setBedCount}
                 setParkingCount={setParkingCount}
                 setHomeType={setHomeType}
-            /> */}
+            />
 
             {address && (
                 <div className="px-3 my-5">

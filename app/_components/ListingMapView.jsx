@@ -40,8 +40,8 @@ function ListingMapView({ type }) {
     };
 
     const handleSearchClick = async () => {
-        console.log(searchedAddress);
-        const searchTerm = searchedAddress?.value?.structured_formatting?.main_text;
+        // console.log(searchedAddress);
+        // const searchTerm = searchedAddress?.value?.structured_formatting?.main_text;
 
         let query = supabase
             .from('listing')
@@ -56,7 +56,7 @@ function ListingMapView({ type }) {
             .gte('bedroom', bedCount)
             .gte('bathroom', bathCount)
             .gte('parking', parkingCount)
-            .like('address', '%' + searchTerm + '%')
+            // .like('address', '%' + searchTerm + '%')
             .order('id', { ascending: false });
 
         if (homeType) {
