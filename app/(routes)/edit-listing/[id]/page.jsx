@@ -274,7 +274,7 @@ function EditListing({ params }) {
                                     <h2 className="font-lg text-gray-500 my-2">Upload Property Images</h2>
                                     <FileUpload
                                         setImages={(value) => setImages(value)}
-                                        imageList={listing.listingImages}
+                                        imageList={listing?.listingImages}
                                     />
                                 </div>
                                 <div className="flex gap-7 justify-end">
