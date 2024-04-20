@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Listing from './Listing';
 import { supabase } from '@/utils/supabase/client';
 import { toast } from 'sonner';
-// import GoogleMapSection from './GoogleMapSection';
+import GoogleMapSection from './GoogleMapSection';
 
 function ListingMapView({ type }) {
     const [listing, setListing] = useState([]);
@@ -66,6 +66,8 @@ function ListingMapView({ type }) {
         const { data, error } = await query;
         if (data) {
             setListing(data);
+        } else {
+            setListing([]);
         }
     };
     return (
@@ -86,7 +88,7 @@ function ListingMapView({ type }) {
                 className="fixed right-10 h-full 
         md:w-[350px] lg:w-[450px] xl:w-[650px]"
             >
-                {/* <GoogleMapSection listing={listing} coordinates={coordinates} /> */}
+                <GoogleMapSection listing={listing} coordinates={coordinates} />
             </div>
         </div>
     );
