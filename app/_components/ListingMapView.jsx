@@ -4,6 +4,7 @@ import Listing from './Listing';
 import { supabase } from '@/utils/supabase/client';
 import { toast } from 'sonner';
 import GoogleMapSection from './GoogleMapSection';
+import MapWithMarkers from './MapWithMarkers';
 
 function ListingMapView({ type }) {
     const [listing, setListing] = useState([]);
@@ -70,6 +71,12 @@ function ListingMapView({ type }) {
             setListing([]);
         }
     };
+
+    const data = [
+        { id: 11, coordinates: { lat: 38.0738612, lng: 46.2978789 } },
+        { id: 9, coordinates: { lat: 35.6892523, lng: 51.3896004 } },
+    ];
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
@@ -88,7 +95,8 @@ function ListingMapView({ type }) {
                 className="fixed right-10 h-full 
         md:w-[350px] lg:w-[450px] xl:w-[650px]"
             >
-                <GoogleMapSection listing={listing} coordinates={coordinates} />
+                {/* <GoogleMapSection listing={listing} coordinates={coordinates} /> */}
+                <MapWithMarkers data={data} />
             </div>
         </div>
     );
