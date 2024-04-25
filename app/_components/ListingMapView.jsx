@@ -72,10 +72,17 @@ function ListingMapView({ type }) {
         }
     };
 
-    const data = [
-        { id: 11, coordinates: { lat: 38.0738612, lng: 46.2978789 } },
-        { id: 9, coordinates: { lat: 35.6892523, lng: 51.3896004 } },
-    ];
+    // const data = [
+    //     { id: 11, coordinates: { lat: 38.0738612, lng: 46.2978789 } },
+    //     { id: 9, coordinates: { lat: 35.6892523, lng: 51.3896004 } },
+    // ];
+
+    const data = listing.map((item) => {
+        return {
+            geocode: [item.coordinates.lat, item.coordinates.lng],
+            popUp: item.address,
+        };
+    });
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -91,12 +98,9 @@ function ListingMapView({ type }) {
                     setCoordinates={setCoordinates}
                 />
             </div>
-            <div
-                className="fixed right-10 h-full 
-        md:w-[350px] lg:w-[450px] xl:w-[650px]"
-            >
+            <div className="">
                 {/* <GoogleMapSection listing={listing} coordinates={coordinates} /> */}
-                <MapWithMarkers data={data} />
+                <MapWithMarkers markers={data} />
             </div>
         </div>
     );
