@@ -8,7 +8,7 @@ import { Icon, divIcon, point } from 'leaflet';
 // create custom icon
 const customIcon = new Icon({
     // iconUrl: require('./icons/placeholder.png'),
-    iconUrl: './pin.png',
+    iconUrl: '/pin.png',
     iconSize: [38, 38], // size of the icon
 });
 

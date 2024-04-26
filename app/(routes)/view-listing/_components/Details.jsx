@@ -2,10 +2,21 @@ import GoogleMapSection from '@/app/_components/GoogleMapSection';
 import { Button } from '@/components/ui/button';
 import { Bath, BedDouble, CarFront, Drill, Home, LandPlot, MapPin, Share } from 'lucide-react';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import AgentDetail from './AgentDetail';
+import MapWithMarkers from '@/app/_components/MapWithMarkers';
+import { popup } from 'leaflet';
 
 function Details({ listingDetail }) {
+    // useEffect(() => {
+    //     const data = listingDetail.map((item) => {
+    //         return {
+    //             geocode: [item.coordinates.lat, item.coordinates.lng],
+    //             popUp: item.address,
+    //         };
+    //     });
+    // }, [listingDetail]);
+    console.log(listingDetail);
     return (
         listingDetail && (
             <div className="my-6 flex gap-2 flex-col">
@@ -70,7 +81,15 @@ function Details({ listingDetail }) {
                 </div>
                 <div>
                     <h2 className="font-bold text-2xl ">Find On Map</h2>
-                    <GoogleMapSection coordinates={listingDetail.coordinates} listing={[listingDetail]} />
+                    {/* <GoogleMapSection coordinates={listingDetail.coordinates} listing={[listingDetail]} /> */}
+                    <MapWithMarkers
+                        markers={[
+                            {
+                                geocode: [listingDetail?.coordinates.lat, listingDetail.coordinates.lng],
+                                popUp: listingDetail?.address,
+                            },
+                        ]}
+                    />
                 </div>
                 <div>
                     <h2 className="font-bold text-2xl ">Contact Agent</h2>
